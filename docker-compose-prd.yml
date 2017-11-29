@@ -1,0 +1,19 @@
+version: '3'
+services:
+  dnmonster:
+    image: amouat/dnmonster:1.0
+
+  redis:
+    image: redis:3.0
+
+  web:
+    build: .
+    ports:
+      - "5555:9090"
+    environment:
+      ENV: PROD
+    volumes:
+      - ./app:/app
+    depends_on:
+      - dnmonster
+      - redis
